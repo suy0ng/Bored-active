@@ -1,11 +1,12 @@
 import React from 'react';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import * as P from "./pages"
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Routes>
+      <Route path="/" element={<P.Main/>} />
+    </Routes>
   );
 }
 

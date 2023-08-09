@@ -1,3 +1,3 @@
 export interface Participation {
-    PARTICIPATION : number;
+  participation: number;
 }
