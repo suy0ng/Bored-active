@@ -1,3 +1,3 @@
-export interface Participation {
+export type Participation = {
   participation: number;
 }

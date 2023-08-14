@@ -1,4 +1,6 @@
 import { styled } from "styled-components";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export const Main = styled.div`
   width: 100vw;
@@ -15,8 +17,3 @@ export const Main = styled.div`
 `;
 
 export const InputContainer = styled.div``;
-
-export const ParticipationNumberInput = styled.input`
-  width: 10vw;
-  height: 4vh;
-`;
