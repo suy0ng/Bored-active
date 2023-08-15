@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { Participation } from "../../types/Participation";
+import { useState } from "react";
 import * as S from "./style";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import { Result } from "../../components";
 
-function Main() {
+const Main: React.FC = () => {
+  const [participant, setParticipant] = useState<number>(0);
+
   return (
     <S.Main>
       <h2> 재미있는 활동 랜덤 추천 🎲</h2>
@@ -22,9 +24,10 @@ function Main() {
         <Button variant="primary" size="lg">
           결과보러가기
         </Button>
+        <Result participant={participant} />
       </S.InputContainer>
     </S.Main>
   );
-}
+};
 
 export default Main;
