@@ -5,9 +5,32 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Result } from "../../components";
 import { createPortal } from "react-dom";
+import axios from "axios";
+import { BoredActivity } from "../../types/apiData/Bored";
+
+export interface BoredAcitivity extends BoredActivity {}
 
 const Main: React.FC = () => {
   const [participant, setParticipant] = useState<number>(0);
+  const [modal, setModal] = useState<boolean>(false);
+  const [boredActivityData, setBoredActivityData] = useState<BoredAcitivity>({
+    activity: "",
+  });
+
+  const handleButtonClick = async () => {
+    if (participant <= 0 || participant >= 9) {
+      window.alert("참가인원은 1명에서 5명사이로 적어주십시오.");
+    }
+    try {
+      setModal(true);
+      const response = await axios.get(
+        `https://www.boredapi.com/api/activity?participants=${participant}`
+      );
+      setBoredActivityData(response.data);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   return (
     <>
@@ -19,6 +42,8 @@ const Main: React.FC = () => {
               인원수
             </InputGroup.Text>
             <Form.Control
+              max={5}
+              min={1}
               type="number"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
@@ -30,12 +55,24 @@ const Main: React.FC = () => {
               }}
             />
           </InputGroup>
-          <Button variant="primary" size="lg">
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={() => {
+              handleButtonClick();
+            }}
+          >
             결과보러가기
           </Button>
         </S.InputContainer>
       </S.Main>
-      {createPortal(<Result participant={participant} />, document.body)}
+      {modal && createPortal(
+        <Result
+          participant={participant}
+          activity={boredActivityData.activity}
+        />,
+        document.body
+      )}
     </>
   );
 };
