@@ -3,8 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export const Main = styled.div`
-  width: 100vw;
-  height: 100vh;
+  
   flex-direction: column;
   display: flex;
   align-items: center;
